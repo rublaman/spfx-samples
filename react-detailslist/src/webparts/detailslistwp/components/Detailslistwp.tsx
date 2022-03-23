@@ -10,12 +10,8 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
         <div className={ styles.container }>
           <div className={ styles.row }>
             <div className={ styles.column }>
-              <span className={ styles.title }>Welcome to SharePoint!</span>
+              <span className={ styles.title }>{this.props.list}</span>
               <p className={ styles.subTitle }>Customize SharePoint experiences using Web Parts.</p>
-              <p className={ styles.description }>{escape(this.props.description)}</p>
-              <a href="https://aka.ms/spfx" className={ styles.button }>
-                <span className={ styles.label }>Learn more</span>
-              </a>
             </div>
           </div>
         </div>
