@@ -6,13 +6,14 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { IPropertyFieldList, PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
 
 import * as strings from 'DetailslistwpWebPartStrings';
 import Detailslistwp from './components/Detailslistwp';
 import { IDetailslistwpProps } from './components/IDetailslistwpProps';
 
 export interface IDetailslistwpWebPartProps {
-  description: string;
+  list: IPropertyFieldList;
 }
 
 export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetailslistwpWebPartProps> {
@@ -21,7 +22,7 @@ export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetails
     const element: React.ReactElement<IDetailslistwpProps> = React.createElement(
       Detailslistwp,
       {
-        description: this.properties.description
+        list: this.properties.list
       }
     );
 
@@ -47,8 +48,18 @@ export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetails
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyFieldListPicker('list', {
+                  label: 'Select a list',
+                  selectedList: this.properties.list,
+                  includeHidden: false,
+                  orderBy: PropertyFieldListPickerOrderBy.Title,
+                  disabled: false,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  context: this.context as any,
+                  onGetErrorMessage: null,
+                  deferredValidationTime: 0,
+                  key: 'listPickerFieldId'
                 })
               ]
             }

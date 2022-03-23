@@ -1,3 +1,5 @@
+import { IPropertyFieldList } from "@pnp/spfx-property-controls";
+
 export interface IDetailslistwpProps {
-  description: string;
+  list: IPropertyFieldList;
 }
