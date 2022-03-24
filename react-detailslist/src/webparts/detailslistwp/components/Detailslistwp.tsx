@@ -4,9 +4,15 @@ import styles from './Detailslistwp.module.scss';
 import { IDetailslistwpProps } from './IDetailslistwpProps';
 
 export default class Detailslistwp extends React.Component<IDetailslistwpProps, {}> {
+
+  constructor(props: IDetailslistwpProps){
+    super(props);
+  }
   
 
   public render(): React.ReactElement<IDetailslistwpProps> {
+    console.log(this.props.multiColumn);
+          
     return (
       <React.Fragment>
         {/* <DetailsList

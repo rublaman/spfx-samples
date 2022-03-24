@@ -69,7 +69,7 @@ export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetails
                   label: 'Select columns',
                   context: this.context as any,
                   selectedColumn: this.properties.multiColumn,
-                  listId: this.properties.list?.id,
+                  listId: this.properties.list.id,
                   disabled: false,
                   orderBy: PropertyFieldColumnPickerOrderBy.Title,
                   onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
