@@ -7,6 +7,7 @@ import {
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IPropertyFieldList, PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
+import { IColumnReturnProperty, PropertyFieldColumnPicker, PropertyFieldColumnPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldColumnPicker';
 
 import * as strings from 'DetailslistwpWebPartStrings';
 import Detailslistwp from './components/Detailslistwp';
@@ -14,6 +15,7 @@ import { IDetailslistwpProps } from './components/IDetailslistwpProps';
 
 export interface IDetailslistwpWebPartProps {
   list: IPropertyFieldList;
+  multiColumn: string[];
 }
 
 export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetailslistwpWebPartProps> {
@@ -22,7 +24,8 @@ export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetails
     const element: React.ReactElement<IDetailslistwpProps> = React.createElement(
       Detailslistwp,
       {
-        list: this.properties.list
+        list: this.properties.list,
+        multiColumn: this.properties.multiColumn
       }
     );
 
@@ -59,7 +62,24 @@ export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetails
                   context: this.context as any,
                   onGetErrorMessage: null,
                   deferredValidationTime: 0,
-                  key: 'listPickerFieldId'
+                  key: 'listPickerFieldId',
+                  includeListTitleAndUrl: true
+                }),
+                PropertyFieldColumnPicker('multiColumn', {
+                  label: 'Select columns',
+                  context: this.context as any,
+                  selectedColumn: this.properties.multiColumn,
+                  listId: this.properties.list?.id,
+                  disabled: false,
+                  orderBy: PropertyFieldColumnPickerOrderBy.Title,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  onGetErrorMessage: null,
+                  deferredValidationTime: 0,
+                  key: 'multiColumnPickerFieldId',
+                  displayHiddenColumns: false,
+                  columnReturnProperty: IColumnReturnProperty.Title,
+                  multiSelect: true,
                 })
               ]
             }
