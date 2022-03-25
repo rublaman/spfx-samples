@@ -17,19 +17,19 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
       items: [],
       selectItem: {},
       columns: []
-    }
+    };
 
     this._selection = new Selection({
       onSelectionChanged: () => {
         console.log("_selection>>> ", this._selection.getSelection()[0]);
-        if (this._selection.getSelection()[0]) return this.setState({ selectItem: this._selection.getSelection()[0] })
+        if (this._selection.getSelection()[0]) return this.setState({ selectItem: this._selection.getSelection()[0] });
       }
-    })
+    });
   }
 
   private _onConfigure = () => {
     this.props.propertyPane.open();
-  };
+  }
 
   public render(): React.ReactElement<IDetailslistwpProps> {
     console.log(this.props.multiColumn);
