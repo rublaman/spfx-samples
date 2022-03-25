@@ -27,9 +27,9 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
     })
   }
 
-  // private _onConfigure = () => {
-  //   this.props.context.propertyPane.open();
-  // };
+  private _onConfigure = () => {
+    this.props.propertyPane.open();
+  };
 
   public render(): React.ReactElement<IDetailslistwpProps> {
     console.log(this.props.multiColumn);

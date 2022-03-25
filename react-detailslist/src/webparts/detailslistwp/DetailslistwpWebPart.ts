@@ -5,7 +5,7 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { BaseClientSideWebPart, IPropertyPaneAccessor } from '@microsoft/sp-webpart-base';
 import { IPropertyFieldList, PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
 import { IColumnReturnProperty, PropertyFieldColumnPicker, PropertyFieldColumnPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldColumnPicker';
 
@@ -16,6 +16,7 @@ import { IDetailslistwpProps } from './components/IDetailslistwpProps';
 export interface IDetailslistwpWebPartProps {
   list: IPropertyFieldList;
   multiColumn: string[];
+  propertyPane: IPropertyPaneAccessor;
 }
 
 export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetailslistwpWebPartProps> {
@@ -25,7 +26,8 @@ export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetails
       Detailslistwp,
       {
         list: this.properties.list,
-        multiColumn: this.properties.multiColumn
+        multiColumn: this.properties.multiColumn,
+        propertyPane: this.context.propertyPane
       }
     );
 
