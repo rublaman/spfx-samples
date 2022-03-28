@@ -30,7 +30,7 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
   }
 
   componentDidMount(): void {
-    
+    this.bindDetails();
   }
 
   componentDidUpdate(prevProps: IDetailslistwpProps, prevState: IDetailslistwpState): void {
@@ -78,9 +78,10 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
 
   private async bindDetails(): Promise<void> {
     try {
-      
+      const listItems: IItems = await this._listService.getListItems(this.props.list.title);
+      console.log(listItems);
     } catch (error) {
-      
+      console.log("Binding details: ",error);
     }
   }
 
