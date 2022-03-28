@@ -5,16 +5,18 @@ import { Placeholder } from '@pnp/spfx-controls-react/lib/controls/placeholder';
 
 import { IDetailslistwpProps } from './IDetailslistwpProps';
 import { IDetailslistwpState } from './IDetailslistwpState';
+import ListServices from '../../../services/ListServices';
+import { IItems } from '@pnp/sp/items';
 
 export default class Detailslistwp extends React.Component<IDetailslistwpProps, IDetailslistwpState> {
 
   private _selection: Selection;
-  private _columns: IColumn[];
+  private _listService: ListServices;
 
   constructor(props: IDetailslistwpProps) {
     super(props);
     this.state = {
-      items: [],
+      listItems: [],
       selectItem: {},
       columns: []
     };
@@ -27,13 +29,21 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
     });
   }
 
+  componentDidMount(): void {
+    
+  }
+
+  componentDidUpdate(prevProps: IDetailslistwpProps, prevState: IDetailslistwpState): void {
+    
+  }
+
   private _onConfigure = () => {
     this.props.propertyPane.open();
   }
 
   public render(): React.ReactElement<IDetailslistwpProps> {
     console.log(this.props.multiColumn);
-    const { items, columns } = this.state;
+    const { listItems, columns } = this.state;
 
     return (
       <React.Fragment>
@@ -41,7 +51,7 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
           this.props.multiColumn &&
           this.props.multiColumn.length > 0 ? (
           <DetailsList
-            items={items}
+            items={listItems}
             columns={columns}
             setKey="set"
             layoutMode={DetailsListLayoutMode.justified}
@@ -64,5 +74,17 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
 
       </React.Fragment>
     );
+  }
+
+  private async bindDetails(): Promise<void> {
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
+
+  private setColumns(){
+
   }
 }
