@@ -5,7 +5,7 @@ import { SPFI, spfi, SPFx } from "@pnp/sp";
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
-import { IItem, IItemAddResult, IItemUpdateResult } from "@pnp/sp/items";
+import { IItemAddResult, IItems, IItemUpdateResult } from "@pnp/sp/items";
 
 
 export default class ListServices implements IListServices {
@@ -21,7 +21,7 @@ export default class ListServices implements IListServices {
   }
 
   // return the items of nameList
-  public getListItems(nameList: string): Promise<any> {
+  public getListItems(nameList: string): Promise<IItems> {
     return this._sp.web.lists
       .getByTitle(nameList)
       .items();
