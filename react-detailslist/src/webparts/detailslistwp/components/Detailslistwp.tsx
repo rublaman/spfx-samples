@@ -27,14 +27,17 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
         if (this._selection.getSelection()[0]) return this.setState({ selectItem: this._selection.getSelection()[0] });
       }
     });
+
+    this._listService = new ListServices(this.props.context);
   }
 
   componentDidMount(): void {
+    console.log("componentDidMount");
     this.bindDetails();
   }
 
-  componentDidUpdate(prevProps: IDetailslistwpProps, prevState: IDetailslistwpState): void {
-    
+  public componentDidUpdate(prevProps: IDetailslistwpProps) {
+    if (this.props.list !== prevProps.list) this.bindDetails();
   }
 
   private _onConfigure = () => {
@@ -78,10 +81,13 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
 
   private async bindDetails(): Promise<void> {
     try {
-      const listItems: IItems = await this._listService.getListItems(this.props.list.title);
-      console.log(listItems);
+      if(this.props.list){
+        console.log(this.props.list.title);
+        const listItems: IItems = await this._listService.getListItems(this.props.list.title);
+        console.log("items: ", listItems);
+      }      
     } catch (error) {
-      console.log("Binding details: ",error);
+      console.log("bindDetails() ERROR\n",error);
     }
   }
 
