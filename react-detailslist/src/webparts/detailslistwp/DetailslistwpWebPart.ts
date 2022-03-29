@@ -25,6 +25,7 @@ export default class DetailslistwpWebPart extends BaseClientSideWebPart<IDetails
     const element: React.ReactElement<IDetailslistwpProps> = React.createElement(
       Detailslistwp,
       {
+        context: this.context,
         list: this.properties.list,
         multiColumn: this.properties.multiColumn,
         propertyPane: this.context.propertyPane
