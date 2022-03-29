@@ -83,8 +83,10 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
     try {
       if(this.props.list){
         console.log(this.props.list.title);
-        const listItems: IItems = await this._listService.getListItems(this.props.list.title);
-        console.log("items: ", listItems);
+        const listItems: any[] = await this._listService.getListItems(this.props.list.title);
+        this._selection.setAllSelected(false);
+        this.setState({listItems: listItems});
+        console.log("items: ", this.state.listItems);
       }      
     } catch (error) {
       console.log("bindDetails() ERROR\n",error);

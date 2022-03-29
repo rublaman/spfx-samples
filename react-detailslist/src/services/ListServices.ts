@@ -21,7 +21,7 @@ export default class ListServices implements IListServices {
   }
 
   // return the items of nameList
-  public getListItems(nameList: string): Promise<IItems> {
+  public getListItems(nameList: string): Promise<any> {
     return this._sp.web.lists
       .getByTitle(nameList)
       .items();
