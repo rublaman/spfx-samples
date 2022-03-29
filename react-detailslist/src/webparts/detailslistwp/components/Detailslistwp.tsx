@@ -33,11 +33,14 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
 
   componentDidMount(): void {
     console.log("componentDidMount");
+    this.setColumns();
     this.bindDetails();
   }
 
   public componentDidUpdate(prevProps: IDetailslistwpProps) {
+    console.log("componentDidUpdate");
     if (this.props.list !== prevProps.list) this.bindDetails();
+    if (this.props.multiColumn !== prevProps.multiColumn) this.setColumns();
   }
 
   private _onConfigure = () => {
@@ -81,19 +84,22 @@ export default class Detailslistwp extends React.Component<IDetailslistwpProps, 
 
   private async bindDetails(): Promise<void> {
     try {
-      if(this.props.list){
+      if (this.props.list) {
         console.log(this.props.list.title);
         const listItems: any[] = await this._listService.getListItems(this.props.list.title);
         this._selection.setAllSelected(false);
-        this.setState({listItems: listItems});
+        this.setState({ listItems: listItems });
         console.log("items: ", this.state.listItems);
-      }      
+      }
     } catch (error) {
-      console.log("bindDetails() ERROR\n",error);
+      console.log("bindDetails() ERROR\n", error);
     }
   }
 
-  private setColumns(){
-
+  private setColumns() {
+    const columns = this.props.multiColumn.map(colName => {
+      return { key: colName, name: colName, fieldName: colName, minWidth: 100, maxWidth: 200, isResizable: true }
+    })
+    this.setState({ columns: columns })
   }
 }
