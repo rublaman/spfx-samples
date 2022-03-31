@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "file-picker-wp-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/filePickerWp/FilePickerWpWebPart.js",
+          "manifest": "./src/webparts/filePickerWp/FilePickerWpWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "FilePickerWpWebPartStrings": "lib/webparts/filePickerWp/loc/{locale}.js"
+  }
+}
