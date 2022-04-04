@@ -1,11 +1,9 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-property-pane';
+import { IPropertyPaneConfiguration, PropertyPaneTextField } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { IPropertyFieldList, PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
 
 import * as strings from 'FilePickerWpWebPartStrings';
 import FilePickerWp from './components/FilePickerWp';
@@ -13,6 +11,7 @@ import { IFilePickerWpProps } from './components/IFilePickerWpProps';
 
 export interface IFilePickerWpWebPartProps {
   description: string;
+  list: IPropertyFieldList;
 }
 
 export default class FilePickerWpWebPart extends BaseClientSideWebPart<IFilePickerWpWebPartProps> {
@@ -47,8 +46,19 @@ export default class FilePickerWpWebPart extends BaseClientSideWebPart<IFilePick
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyFieldListPicker('lists', {
+                  label: 'Select a list',
+                  selectedList: this.properties.list,
+                  includeHidden: false,
+                  orderBy: PropertyFieldListPickerOrderBy.Title,
+                  disabled: false,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  context: this.context as any,
+                  onGetErrorMessage: null,
+                  deferredValidationTime: 0,
+                  key: 'listPickerFieldId',
+                  includeListTitleAndUrl: true
                 })
               ]
             }

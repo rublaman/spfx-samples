@@ -13,6 +13,7 @@
   },
   "externals": {},
   "localizedResources": {
-    "FilePickerWpWebPartStrings": "lib/webparts/filePickerWp/loc/{locale}.js"
+    "FilePickerWpWebPartStrings": "lib/webparts/filePickerWp/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
 }

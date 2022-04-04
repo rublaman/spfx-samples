@@ -7,6 +7,7 @@ export default class FilePickerWp extends React.Component<IFilePickerWpProps, {}
   public render(): React.ReactElement<IFilePickerWpProps> {
     return (
       <div className={ styles.filePickerWp }>
+        
       </div>
     );
   }
